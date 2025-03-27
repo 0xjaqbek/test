@@ -1,0 +1,401 @@
+.message-container {
+  margin-top: 70px;
+  padding-bottom: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
+  
+  overflow-y: visible; 
+}
+
+/* Message header with profile image */
+.message-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Base message styling */
+.message {
+  padding: clamp(20px, 4.67vw, 38px);
+  text-align: left;
+  text-transform: uppercase;
+  font-size: clamp(13px, 3.36vw, 20px);
+  background-color: rgb(0, 0, 0);
+  border: 1px #ffa12b solid;
+  color: #ffa12b;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  position: absolute;
+  animation: fadeInUp 0.3s ease-in-out forwards;
+  margin: 0 auto;
+}
+
+/* Fade out effect for messages and input box */
+.message.fade-out,
+.input-box.fade-out {
+  opacity: 0;
+  transition: opacity 3s ease;
+}
+
+.message:last-child {
+  margin-bottom: 240px;
+}
+
+.message-container.chat-disabled {
+  padding-bottom: 70px; 
+}
+
+.input-disabled .message:last-child {
+  margin-bottom: 210px; 
+}
+
+.left-message {
+  color: #ffffff;
+  border: 1px #0EDBFF solid;
+  margin-bottom: 20px;
+}
+
+/* Extra padding for the 7th message */
+.message-with-extra-padding {
+  margin-bottom: 70px !important;
+}
+
+/* Profile image */
+.profile-img {
+  width: 28px;
+  height: 28px;
+  margin-right: 15px;
+}
+
+/* Fade-in animation for messages - adjust for centered messages */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.chat-wrapper {
+  top: 135px;
+  display: flex;
+  flex-direction: column;
+  height: calc(70vh - 70px);
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+/* More prominent highlight for new messages */
+.message:last-child {
+  animation: enhanced-flash-highlight 1.5s ease-out;
+  box-shadow: 0 0 12px rgba(255, 161, 43, 0.7);
+}
+
+.left-message:last-child {
+  animation: enhanced-flash-highlight-blue 1.5s ease-out;
+  box-shadow: 0 0 12px rgba(14, 219, 255, 0.7);
+}
+
+/* Mobile versions */
+.mobile-message:last-child {
+  animation: enhanced-flash-highlight 1.5s ease-out;
+  box-shadow: 0 0 12px rgba(255, 161, 43, 0.7);
+}
+
+.mobile-left-message:last-child {
+  animation: enhanced-flash-highlight-blue 1.5s ease-out;
+  box-shadow: 0 0 12px rgba(14, 219, 255, 0.7);
+}
+
+/* Enhanced animations with stronger visual effect */
+@keyframes enhanced-flash-highlight {
+  0% {
+    border-color: rgba(255, 161, 43, 1);
+    border-width: 2px;
+    box-shadow: 0 0 15px rgba(255, 161, 43, 0.8);
+  }
+  50% {
+    border-color: rgba(255, 161, 43, 0.9);
+    border-width: 2px;
+    box-shadow: 0 0 10px rgba(255, 161, 43, 0.6);
+  }
+  100% {
+    border-color: #ffa12b;
+    border-width: 1px;
+    box-shadow: none;
+  }
+}
+
+@keyframes enhanced-flash-highlight-blue {
+  0% {
+    border-color: rgba(14, 219, 255, 1);
+    border-width: 2px;
+    box-shadow: 0 0 15px rgba(14, 219, 255, 0.8);
+  }
+  50% {
+    border-color: rgba(14, 219, 255, 0.9);
+    border-width: 2px;
+    box-shadow: 0 0 10px rgba(14, 219, 255, 0.6);
+  }
+  100% {
+    border-color: #0EDBFF;
+    border-width: 1px;
+    box-shadow: none;
+  }
+}
+
+/* Make sure animations run */
+.message, .mobile-message {
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+/* Fix for delayed animation */
+.message:not(:last-child), .mobile-message:not(:last-child) {
+  animation: none;
+  box-shadow: none;
+}
+
+/* Input box styling */
+.input-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  background-color: rgb(0, 0, 0);
+  border: 1px #ffa12b solid;
+  color: #ffa12b;
+  position: fixed;
+  bottom: 0;
+  width: 455px;
+  z-index: 100; /* Ensure input is above messages */
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+.message:not(.left-message) {
+  margin-top: 5px; /* This adds 10px space at the top of user messages */
+}
+
+.message {
+  margin-bottom: calc(var(--n) * 10px); /* This scales with the value of --n */
+}
+
+/* For specifically --n: 6, add exactly 60px margin */
+.message[style*="--n: 6"] {
+  margin-bottom: 60px !important;
+}
+
+/* Enter story button container */
+.enter-story-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  width: 45%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+}
+
+/* Enter story button styling */
+.enter-story-button {
+  padding: 15px 25px;
+  margin-bottom: 40px;
+  border-radius: 20px;
+  background-color: #001626;
+  filter: drop-shadow(0px 0px 16px rgba(0, 255, 255, 0.5));
+  border: 1px #0EDBFF solid;
+  color: #0EDBFF;
+  font-family: "REM";
+  font-weight: bold;
+  font-size: clamp(18px, 3vw, 20px);
+  min-width: 200px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.enter-story-button:hover {
+  background-color: rgba(0, 255, 255, 0.1);
+  transform: scale(0.98);
+}
+
+/* Disabled input box */
+.disabled-box {
+  border-color: #bbbbbb;
+  width: 455px;
+}
+
+/* Input field */
+.input {
+  margin: 20px;
+  width: 90%;
+  background-color: rgb(0, 0, 0);
+  text-align: left;
+  text-transform: uppercase;
+  font-size: clamp(15px, 3.36vw, 20px);
+  font-weight: bold;
+  color: #ffa12b;
+  border: none;
+  align-self: center;
+}
+
+/* Input button */
+.input-button {
+  margin: 20px;
+  margin-top: 0;
+  padding: 9px;
+  border-radius: 9px;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: clamp(15px, 3.36vw, 20px);
+  font-weight: bold;
+  background-color: black;
+  border: 1px #ffa12b solid;
+  color: #ffa12b;
+}
+
+/* Button hover effect */
+.input-button:hover {
+  background-color: rgba(205, 150, 32, 0.2);
+  cursor: pointer;
+  transform: scale(0.99);
+  transition: 0.1s;
+}
+
+/* Placeholder text colors */
+.input::placeholder {
+  color: #ffa12b;
+}
+
+.input-disabled::placeholder {
+  color: #bbbbbb;
+}
+
+/* Typing animation */
+.typing {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  gap: 5px;
+}
+
+.typing span {
+  margin-top: 3px;
+  width: 6px;
+  height: 6px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  animation: blink 2s infinite;
+}
+
+.typing span:nth-child(1) {
+  animation-delay: 0s;
+}
+.typing span:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.typing span:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+/* Back to top button */
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 0px solid #0EDBFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 90;
+}
+
+/* Input error message styles for desktop */
+.input-error {
+  color: #FF6B6B;
+  font-size: 14px;
+  margin: 0 20px 10px 20px;
+  text-align: left;
+  font-family: "REM", sans-serif;
+}
+
+/* Input error message styles for mobile */
+.mobile-input-error {
+  color: #FF6B6B;
+  font-size: 12px;
+  margin: 0 20px 10px 20px;
+  text-align: left;
+  font-family: "REM", sans-serif;
+}
+
+/* Error highlight for input fields */
+.input.error, .mobile-input.error {
+  border-color: #FF6B6B;
+}
+
+/* Animation for error message */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.input-error, .mobile-input-error {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.enter-story-button-container.slide-in {
+  animation: slideInUp 0.6s ease-out forwards;
+}

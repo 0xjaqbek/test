@@ -1,0 +1,476 @@
+html, body {
+
+  width: 100%;
+  height: 100%;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .mobile-message-container {
+    /* This forces hardware acceleration for smoother scrolling */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  /* Add extra bottom space for the home indicator on notched iOS devices */
+  .mobile-input-box {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+.mobile-chat-container {
+  width: 100%;
+  height: 100vh;
+  height: 100svh; /* Modern browsers will use this */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden; /* Prevent outer scrolling */
+}
+
+.mobile-chat-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 100;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.header-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+
+/* Fade-out effect for mobile messages and input box */
+.mobile-message.fade-out,
+.mobile-input-box.fade-out {
+  opacity: 0;
+  transition: opacity 3s ease;
+}
+
+.header-border {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  margin-left: 20px;
+  height: 1px;
+  background-color: #0EDBFF;
+  margin: 8px auto;
+}
+
+.header-left, .header-right {
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-text {
+  width: 100%;
+  text-align: center;
+}
+
+.diaries-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0EDBFF;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.chapter-title-mobile {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.chapter-number-mobile {
+  color: #0EDBFF;
+  font-weight: 700;
+}
+
+.mobile-social-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 8px;
+  padding-top: 3px;
+}
+
+.mobile-social-icon {
+  height: 20px;
+  width: auto;
+  transition: transform 0.2s;
+}
+
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.mobile-message-container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobile-chat-wrapper {
+  -webkit-overflow-scrolling: touch;
+  height: calc(100vh - 120px); /* Subtract header height */
+  padding-top: 120px; /* Account for header */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+/* More prominent highlight for new messages */
+.message:last-child {
+  animation: enhanced-flash-highlight 1.5s ease-out;
+  box-shadow: 0 0 12px rgba(255, 161, 43, 0.7);
+}
+
+.left-message:last-child {
+  animation: enhanced-flash-highlight-blue 1.5s ease-out;
+  box-shadow: 0 0 12px rgba(14, 219, 255, 0.7);
+}
+
+/* Mobile versions */
+.mobile-message:last-child {
+  animation: enhanced-flash-highlight 1.5s ease-out;
+  box-shadow: 0 0 12px rgba(255, 161, 43, 0.7);
+}
+
+.mobile-left-message:last-child {
+  animation: enhanced-flash-highlight-blue 1.5s ease-out;
+  box-shadow: 0 0 12px rgba(14, 219, 255, 0.7);
+}
+
+/* Enhanced animations with stronger visual effect */
+@keyframes enhanced-flash-highlight {
+  0% {
+    border-color: rgba(255, 161, 43, 1);
+    border-width: 2px;
+    box-shadow: 0 0 15px rgba(255, 161, 43, 0.8);
+  }
+  50% {
+    border-color: rgba(255, 161, 43, 0.9);
+    border-width: 2px;
+    box-shadow: 0 0 10px rgba(255, 161, 43, 0.6);
+  }
+  100% {
+    border-color: #ffa12b;
+    border-width: 1px;
+    box-shadow: none;
+  }
+}
+
+@keyframes enhanced-flash-highlight-blue {
+  0% {
+    border-color: rgba(14, 219, 255, 1);
+    border-width: 2px;
+    box-shadow: 0 0 15px rgba(14, 219, 255, 0.8);
+  }
+  50% {
+    border-color: rgba(14, 219, 255, 0.9);
+    border-width: 2px;
+    box-shadow: 0 0 10px rgba(14, 219, 255, 0.6);
+  }
+  100% {
+    border-color: #0EDBFF;
+    border-width: 1px;
+    box-shadow: none;
+  }
+}
+
+/* Make sure animations run */
+.message, .mobile-message {
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+/* Fix for delayed animation */
+.message:not(:last-child), .mobile-message:not(:last-child) {
+  animation: none;
+  box-shadow: none;
+}
+
+.mobile-message {
+  width: 85%;
+  max-width: 500px;
+  padding: 20px;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: rgb(0, 0, 0);
+  border: 1px #ffa12b solid;
+  color: #ffa12b;
+  margin-top: 9px; /* Add space between messages */
+  position: relative; /* Change from absolute to relative positioning */
+  animation: fadeInMessage 0.3s ease-in-out forwards;
+}
+
+.mobile-message:nth-child(even) {
+  width: 83%; 
+}
+
+.mobile-left-message {
+  color: #ffffff;
+  border: 1px #0EDBFF solid;
+}
+
+.mobile-message-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Extra padding for the 7th message */
+.mobile-message.message-with-extra-padding {
+  margin-bottom: 70px !important;
+}
+
+.profile-img {
+  width: 28px;
+  height: 28px;
+  margin-right: 15px;
+}
+
+.mobile-message-content {
+  word-wrap: break-word;
+}
+
+.typing {
+  display: flex;
+  gap: 5px;
+  margin: 8px 0;
+}
+
+.typing span {
+  width: 6px;
+  height: 6px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  animation: blink 2s infinite;
+}
+
+.typing span:nth-child(1) {
+  animation-delay: 0s;
+}
+.typing span:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.typing span:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+@keyframes blink {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Enter story button container for mobile */
+.mobile-enter-story-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  width: 85%;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+}
+
+/* Enter story button styling for mobile */
+.mobile-enter-story-button {
+  width: 90%;
+  padding: 15px 20px;
+  background-color: #001626;
+  filter: drop-shadow(0px 0px 16px rgba(0, 255, 255, 0.5));
+  border: 1px #0EDBFF solid;
+  color: #0EDBFF;
+  font-family: "REM";
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-enter-story-button:hover {
+  background-color: rgba(0, 255, 255, 0.1);
+  transform: scale(0.98);
+}
+
+/* Mobile input box styling */
+.mobile-input-box {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 87%;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000;
+  border: 1px #ffa12b solid;
+  padding: 10px 0;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+
+.mobile-disabled-box {
+  border-color: #bbbbbb;
+}
+
+.mobile-input {
+  font-size: 16px !important; 
+  margin: 20px;
+  width: 90%;
+  background-color: rgb(0, 0, 0);
+  text-align: left;
+  text-transform: uppercase;
+  font-size: clamp(15px, 3.36vw, 20px);
+  font-weight: bold;
+  color: #ffa12b;
+  border: none;
+  align-self: center;
+}
+
+.mobile-input::placeholder {
+  color: #ffa12b;
+}
+
+.mobile-input-disabled::placeholder {
+  color: #bbbbbb;
+}
+
+.mobile-input-button {
+  width: 90%;
+  padding: 10px;
+  background-color: #000;
+  border: 1px #ffa12b solid;
+  color: #ffa12b;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/* Back to Top Button */
+.mobile-back-to-top {
+  position: fixed;
+  bottom: 90px;
+  right: 50px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 0px solid #0EDBFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+}
+
+@keyframes mobileSlideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-enter-story-button-container.slide-in {
+  animation: mobileSlideInUp 0.6s ease-out forwards;
+}
+
+/* Input error message styles */
+.mobile-input-error {
+  color: #FF6B6B;
+  font-size: 12px;
+  margin: 0 20px 10px 20px;
+  text-align: left;
+  font-family: "REM", sans-serif;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Error highlight for input field */
+.mobile-input.error {
+  border-color: #FF6B6B;
+}
+
+/* Animation for error message */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,433 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body.story-page-mobile {
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'REM', sans-serif;
+}
+
+.story-mobile-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.story-mobile-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 100;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box; /* Important: include padding in width calculation */
+}
+
+ .header-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 20px;
+  box-sizing: border-box; /* Important: include padding in width calculation */
+}
+
+.header-border {
+  display: flex;
+  align-items: center;
+
+  height: 1px;
+  background-color: #0EDBFF;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+/* Left and right sections of the top header */
+.header-left, .header-right {
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Center content section */
+.header-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Text container */
+.header-text {
+  width: 100%;
+  text-align: center;
+  margin-left: 20px;
+}
+
+/* Diaries title */
+.diaries-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0EDBFF;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+/* Chapter title */
+.chapter-title-mobile {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Social icons in bottom section */
+.mobile-social-icons {
+  padding-left: 10px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Individual social icon */
+.mobile-social-icon {
+  height: 20px;
+  width: auto;
+  transition: transform 0.2s;
+}
+
+/* Special handling for Manifold icon */
+.mobile-social-icon[alt="Manifold"] {
+  height: 30px;
+}
+
+/* Navigation icon */
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.play-icon {
+  width: 28px; /* Increased from default 24px */
+  height: 28px; /* Increased from default 24px */
+  padding: 3px;
+  cursor: pointer;
+}
+
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 200;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.mobile-nav-container {
+  width: 85%;
+  max-width: 350px;
+  margin-top: 130px;
+  background-color: #000;
+  border: 1px solid #0EDBFF;
+  border-radius: 8px;
+  overflow: hidden;
+  animation: slideDown 0.3s ease-out;
+}
+
+.mobile-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.mobile-nav-header h2 {
+  margin: 0;
+  color: #0EDBFF;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.close-nav {
+  background: none;
+  border: none;
+  color: #0EDBFF;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.mobile-chapters-list {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 10px 0;
+}
+
+.mobile-chapter-item {
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.mobile-chapter-item:last-child {
+  border-bottom: none;
+}
+
+.mobile-chapter-item.active {
+  background-color: rgba(0, 255, 255, 0.1);
+}
+
+.mobile-chapter-item .chapter-number {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0EDBFF;
+  margin-bottom: 5px;
+}
+
+.mobile-chapter-item .chapter-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.mobile-banner-container {
+  width: 100vw;
+  margin-top: 120px;
+  background-color: #000;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .mobile-banner-container {
+    margin-top: 120px; /* Keep consistent with header height */
+  }
+}
+
+.mobile-banner-img {
+  margin-top: 7px;
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: 1px solid #000; 
+}
+
+.mobile-chapter-title {
+  display: none;
+}
+
+.mobile-nft-container {
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(0, 255, 255, 0.0);
+  margin-top: -40%;
+  position: relative;
+  z-index: 10;
+}
+
+.bottom-nft-container {
+  margin-top: auto; /* Added top margin for separation */
+  margin-bottom: 50px;
+  position: relative; /* Changed from absolute to relative */
+  display: block;
+  clear: both;
+  align-content: center;
+}
+
+.mobile-nft-img {
+  width: 150px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.mobile-nft-info {
+  width: 100%;
+}
+
+.mobile-nft-info .nft-title-h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 55px 0 5px 0;
+  text-align: center;
+}
+
+.mobile-nft-info .nft-title-h2 {
+  font-size: 20px;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+
+.bottom-nft-container .mobile-nft-info {
+  text-align: center;
+}
+
+.bottom-nft-container .nft-title-h1,
+.bottom-nft-container .nft-title-h2 {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mobile-mint-button {
+  font-family: REM;
+  background-color: rgb(0, 22, 38);
+  color: #0EDBFF;
+  padding: 20px 20px;
+  border: 1px solid #0EDBFF;
+  border-radius: 11px;
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mobile-mint-button:hover, .mobile-mint-button:active {
+  background-color: rgba(0, 255, 255, 0.1);
+}
+
+.mobile-plot-container {
+  padding: 20px 15px;
+}
+
+.mobile-plot-summary {
+  color: #0EDBFF;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  text-transform: none;
+}
+
+.mobile-plot {
+  color: #ffffff;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  text-transform: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+button, .nav-icon, .mobile-chapter-item {
+  min-height: 44px;
+}
+
+.mobile-chapters-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mobile-chapters-list::-webkit-scrollbar-track {
+  background: #000;
+}
+
+.mobile-chapters-list::-webkit-scrollbar-thumb {
+  background: #0EDBFF;
+  border-radius: 4px;
+}
+
+.mobile-plot br {
+  line-height: 2;
+}
+
+.bottom-nft-container {
+  margin-bottom: 50px;
+}
+
+.large-nft-img {
+  width: 90% !important;
+  max-width: 90vw !important;
+  height: auto !important;
+  margin-bottom: 25px;
+  margin-top: 55px;
+}
+
+.mobile-coming-soon-header {
+  padding: 15px 10px 5px 10px;
+  margin-top: 10px;
+}
+
+.mobile-coming-soon-text {
+  color: #0EDBFF;
+  font-family: 'REM', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.mobile-coming-soon-item {
+  opacity: 0.6;
+  cursor: default;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mobile-coming-soon-item:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  cursor: not-allowed;
+}

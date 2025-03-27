@@ -1,0 +1,260 @@
+.audio-control-icon {
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.audio-control-icon:hover {
+  transform: scale(1.1);
+}
+
+.audio-control-icon.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.audio-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #0EDBFF;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 1px solid #0EDBFF;
+  z-index: 1000;
+  font-family: 'REM', sans-serif;
+  font-size: 14px;
+  animation: fadeInUp 0.3s ease-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+}
+
+.audio-toast.hiding {
+  animation: fadeOut 0.3s ease-in forwards;
+}
+
+.audio-title {
+  color: white;
+  font-weight: 500;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .audio-toast {
+    width: 80%;
+    font-size: 12px;
+    padding: 10px 15px;
+  }
+}
+/* Auto-scrolling styles */
+.auto-scrolling {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced audio player styles */
+.audio-controls-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audio-progress-indicator {
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  height: 2px;
+  background-color: #0EDBFF;
+  transition: width 0.2s linear;
+}
+
+/* Play button focus styles */
+.story-nav-icon.play-icon:focus,
+.nav-icon.play-icon:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(14, 219, 255, 0.5);
+  border-radius: 50%;
+}
+
+/* Toast enhancement */
+.audio-toast .scroll-status {
+  font-size: 11px;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* Scroll animation effects */
+@keyframes scrollHighlight {
+  0% {
+    background-color: rgba(14, 219, 255, 0.05);
+  }
+  50% {
+    background-color: rgba(14, 219, 255, 0.1);
+  }
+  100% {
+    background-color: rgba(14, 219, 255, 0.05);
+  }
+}
+
+.auto-scrolling .plot-container p,
+.auto-scrolling .mobile-plot-container p {
+  transition: background-color 0.5s ease;
+}
+
+.current-paragraph {
+  animation: scrollHighlight 2s infinite;
+  border-left: 2px solid #0EDBFF;
+  padding-left: 10px;
+}
+
+/* Make sure content doesn't jump during scroll */
+.plot-container,
+.mobile-plot-container {
+  will-change: transform;
+  overflow-anchor: none;
+}
+
+/* Custom scroll handling for smooth experience */
+html.smooth-scroll,
+body.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced play/pause button */
+.story-nav-icon.play-icon img,
+.nav-icon.play-icon img {
+  filter: drop-shadow(0 0 3px rgba(14, 219, 255, 0.5));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.story-nav-icon.play-icon:hover img,
+.nav-icon.play-icon:hover img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 5px rgba(14, 219, 255, 0.7));
+}
+
+/* Auto-scroll notification */
+.auto-scroll-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #0EDBFF;
+  padding: 8px 15px;
+  border-radius: 10px;
+  font-size: 12px;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.auto-scroll-notification.visible {
+  opacity: 1;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .auto-scroll-notification {
+    width: 80%;
+    font-size: 11px;
+  }
+}
+/* Additional styles for audio player and toast */
+
+/* Persistent toast styles */
+.audio-toast.persistent-toast {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: none !important;
+  animation: none !important;
+  bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid #0EDBFF;
+  z-index: 1001;
+}
+
+/* Desktop toast positioning */
+.audio-toast.desktop-toast {
+  bottom: 70px !important;
+}
+
+/* Auto-scroll toggle styles */
+.auto-scroll-toggle {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  padding: 5px;
+  border-radius: 4px;
+  margin-left: 15px;
+}
+
+.auto-scroll-toggle:hover {
+  background-color: rgba(14, 219, 255, 0.1);
+}
+
+.auto-scroll-toggle img {
+  width: 60px;
+  height: 60px;
+  transition: transform 0.2s;
+}
+
+.auto-scroll-toggle:hover img {
+  transform: scale(1.1);
+}
+
+/* Toast content adjustments */
+.audio-toast-content {
+  display: flex;
+}
+
+.audio-toast {
+  min-width: 300px;
+  padding: 12px 20px;
+}
+
+@media (max-width: 768px) {
+  .audio-toast {
+    min-width: 260px;
+    max-width: 90%;
+  }
+  
+  .auto-scroll-toggle img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Remove the hiding animation for persistent toast */
+.audio-toast.persistent-toast.hiding {
+  animation: none !important;
+  opacity: 1 !important;
+}

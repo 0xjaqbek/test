@@ -1,0 +1,15 @@
+.header-main {
+  background-color: rgb(113, 148, 219);
+
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+
+  box-sizing: border-box;
+}
