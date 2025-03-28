@@ -1,5 +1,5 @@
 {
-  "homepage": "https://0xjaqbek.github.io/test/",
+
   "name": "aria-landingpage",
   "version": "0.1.1",
   "private": true,
@@ -13,7 +13,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "npm run build && firebase deploy",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
