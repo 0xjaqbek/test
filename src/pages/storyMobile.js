@@ -164,13 +164,15 @@ const StoryMobile = () => {
       </div>
       
       <div className="mobile-nft-container">
-        <img 
-          src={getNftSrc()} 
-          alt={`Chapter ${currentChapter} NFT`} 
-          className="mobile-nft-img" 
-        />
+        <div className="mobile-nft-img-wrapper shine">
+          <img 
+            src={getNftSrc()} 
+            alt={`Chapter ${currentChapter} NFT`} 
+            className="mobile-nft-img" 
+          />
+        </div>
         <div className="mobile-nft-info">
-        <h1 className="nft-title-h1">
+          <h1 className="nft-title-h1">
             {chapters[currentChapter]["nft-title-h1"].split('\n').map((line, index) => (
               <React.Fragment key={index}>
                 {line}
@@ -208,13 +210,15 @@ const StoryMobile = () => {
 
       {/* Bottom NFT container with proper spacing */}
       <div className="mobile-nft-container bottom-nft-container">
-        <img 
-          src={getNftSrc()} 
-          alt={`Chapter ${currentChapter} NFT`} 
-          className="mobile-nft-img large-nft-img" 
-        />
+        <div className="mobile-nft-img-wrapper shine">
+          <img 
+            src={getNftSrc()} 
+            alt={`Chapter ${currentChapter} NFT`} 
+            className="mobile-nft-img large-nft-img" 
+          />
+        </div>
         <div className="mobile-nft-info">
-        <h1 className="nft-title-h1">
+          <h1 className="nft-title-h1">
             {chapters[currentChapter]["nft-title-h1-bottom"].split('\n').map((line, index) => (
               <React.Fragment key={index}>
                 {line}
@@ -228,6 +232,7 @@ const StoryMobile = () => {
           </button>
         </div>
       </div>
+
       
       {window.scrollY > 200 && (
         <img 

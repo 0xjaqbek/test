@@ -1,0 +1,67 @@
+/* NFT Image Shine Effect */
+.nft-img-wrapper,
+.mobile-nft-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nft-img-wrapper {
+  width: 250px;
+  height: auto;
+}
+
+.mobile-nft-img-wrapper {
+  width: 150px;
+  margin: 0 auto;
+}
+
+.mobile-nft-img-wrapper .large-nft-img {
+  width: 90%;
+  max-width: 90vw;
+}
+
+/* Ensure images maintain their properties */
+.nft-img-wrapper img,
+.mobile-nft-img-wrapper img {
+  height: auto;
+  width: 100%;
+  display: block;
+}
+
+/* Shine effect */
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::before {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  content: "";
+  display: block;
+  height: 100%;
+  left: -85%;
+  position: absolute;
+  top: 0;
+  transform: skewX(-25deg);
+  width: 50%;
+  z-index: 2;
+}
+
+.shine:hover::before,
+.shine:focus::before {
+  animation: shine 0.85s;
+}
+
+@keyframes shine {
+  100% {
+    left: 125%;
+  }
+}

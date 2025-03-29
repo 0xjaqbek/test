@@ -9,6 +9,7 @@ import StoryMobile from "./pages/storyMobile";
 import HistoriaMobile from "./pages/historiaMobile";
 import NotFound from "./pages/NotFound";
 import { useMobileMediaQuery, useHeaderMediaQuery } from "./DeviceDetection";
+import './nft-shine-effect.css';
 
 function App() {
   // eslint-disable-next-line no-unused-vars

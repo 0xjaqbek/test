@@ -26,6 +26,7 @@ const ChatComponent = () => {
   const [messagePositions, setMessagePositions] = useState({});
   const [inputError, setInputError] = useState("");
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [prevIsMobile, setPrevIsMobile] = useState(null);
   
   const messageRefs = useRef({});
   const chatWrapperRef = useRef(null);
@@ -36,22 +37,58 @@ const ChatComponent = () => {
   const location = useLocation();
   const isMobile = useMobileMediaQuery();
 
+  // Track viewport mode changes
+  useEffect(() => {
+    if (prevIsMobile !== null && prevIsMobile !== isMobile) {
+      // Force recalculation of message positions on viewport mode change
+      setTimeout(() => {
+        updateMessagePositions();
+      }, 300);
+    }
+    setPrevIsMobile(isMobile);
+  }, [isMobile]);
+
   // Auto-scroll to bottom when messages change
   useEffect(() => {
     const scrollToBottom = () => {
-      // Immediate scroll attempt
-      if (isMobile && mobileWrapperRef.current) {
+      // Calculate the height of all messages for desktop view
+      if (!isMobile && messages.length > 0) {
+        const lastMessageId = messages[messages.length - 1].id;
+        const lastMessagePos = messagePositions[lastMessageId];
+        const lastMessageEl = messageRefs.current[lastMessageId];
+        
+        if (lastMessageEl && lastMessagePos) {
+          const totalHeight = lastMessagePos + lastMessageEl.offsetHeight + 200; // Add padding
+          
+          if (chatWrapperRef.current) {
+            chatWrapperRef.current.scrollTop = totalHeight;
+          }
+        } else {
+          // Fallback if we can't calculate exact height
+          if (chatWrapperRef.current) {
+            chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
+          }
+        }
+      } 
+      // Mobile scroll handling
+      else if (isMobile && mobileWrapperRef.current) {
         mobileWrapperRef.current.scrollTop = mobileWrapperRef.current.scrollHeight;
-      } else if (chatWrapperRef.current) {
-        chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
       }
       
       // Second scroll attempt after a slight delay to ensure DOM is fully updated
       setTimeout(() => {
         if (isMobile && mobileWrapperRef.current) {
           mobileWrapperRef.current.scrollTop = mobileWrapperRef.current.scrollHeight;
-        } else if (chatWrapperRef.current) {
-          chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
+        } else if (chatWrapperRef.current && !isMobile && messages.length > 0) {
+          const lastMessageId = messages[messages.length - 1].id;
+          const lastMessageEl = messageRefs.current[lastMessageId];
+          
+          if (lastMessageEl) {
+            const totalHeight = lastMessageEl.offsetTop + lastMessageEl.offsetHeight + 200;
+            chatWrapperRef.current.scrollTop = totalHeight;
+          } else {
+            chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
+          }
         }
       }, 100);
     };
@@ -59,38 +96,58 @@ const ChatComponent = () => {
     if (messages.length > 0) {
       scrollToBottom();
     }
-  }, [messages, isMobile]);
+  }, [messages, isMobile, messagePositions]);
 
+  // Update message positions based on actual DOM elements
+  const updateMessagePositions = () => {
+    if (messages.length === 0) return;
+    
+    // Start from the top of the chat wrapper - with minimal initial offset
+    let currentTop = 20;
+    const newPositions = {};
+    
+    messages.forEach((message, index) => {
+      const messageId = message.id;
+      const messageElement = messageRefs.current[messageId];
+      
+      newPositions[messageId] = currentTop;
+      
+      if (messageElement) {
+        const height = messageElement.offsetHeight;
+        // Use different overlap values for mobile vs desktop
+        const overlap = isMobile ? 5 : 20;
+        currentTop += height - overlap;
+      } else {
+        // Default height estimate if element not found
+        currentTop += isMobile ? 85 : 105;
+      }
+    });
+    
+    setMessagePositions(newPositions);
+  };
+
+  // Update positions when messages change or viewport changes
   useEffect(() => {
     if (messages.length === 0) return;
     
-    const updatePositions = () => {
-      let currentTop = 10;
-      const newPositions = {};
-      
-      messages.forEach((message) => {
-        const messageId = message.id;
-        const messageElement = messageRefs.current[messageId];
-        
-        newPositions[messageId] = currentTop;
-        
-        if (messageElement) {
-          const height = messageElement.offsetHeight;
-          currentTop += height - 15; // Overlap
-        } else {
-          currentTop += 105; // Default height estimate
-        }
-      });
-      
-      setMessagePositions(newPositions);
+    // Initial calculation
+    updateMessagePositions();
+    
+    // Secondary calculation after a short delay to ensure DOM is updated
+    const timer = setTimeout(updateMessagePositions, 100);
+    
+    // Add window resize listener to recalculate on resize
+    const handleResize = () => {
+      updateMessagePositions();
     };
     
-    updatePositions();
+    window.addEventListener('resize', handleResize);
     
-    const timer = setTimeout(updatePositions, 100);
-    
-    return () => clearTimeout(timer);
-  }, [messages]);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [messages, isMobile]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -428,7 +485,7 @@ const ChatComponent = () => {
             <a href="https://instagram.com/0xariaingram/" target="_blank" rel="noopener noreferrer">
               <img src={SocialIconsInstagram} alt="Instagram" className="mobile-social-icon" />
             </a>
-            <a href="https://manifold.xyz/" target="_blank" rel="noopener noreferrer">
+            <a href="https://manifold.xyz" target="_blank" rel="noopener noreferrer">
               <img src={Manifold} alt="Manifold" className="mobile-social-icon" />
             </a>
           </div>
@@ -525,7 +582,7 @@ const ChatComponent = () => {
         showChaptersButton={true}
       />
       <div className="chat-wrapper" ref={chatWrapperRef}>
-      <div className="message-container" style={{ overflow: 'visible' }}>
+      <div className="message-container" style={{ overflow: 'visible', paddingTop: '20px' }}>
           {messages.map((message, index) => {
             const messageId = message.id;
             const isLastMessage = index === messages.length - 1;
@@ -549,7 +606,7 @@ const ChatComponent = () => {
                     width: isEven ? '450px' : '460px', // Different widths for even/odd messages
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    top: `${messagePositions[messageId] || 20 + (index * 105)}px`,
+                    top: `${messagePositions[messageId] || 20 + (index * 70)}px`,
                   }}
 
               >

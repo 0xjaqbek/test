@@ -101,27 +101,27 @@ const Historia = ({ useHeaderMobile = false }) => {
         />
       </div>
       
-      <div className="nft-container">
-        <div className="nft-content">
+      <div className="nft-content">
+        <div className="nft-img-wrapper shine">
           <img 
             src={getNftSrc()} 
             alt={`Rozdział ${currentChapter} NFT`} 
             className="nft-img" 
           />
-          <div className="nft-text-container">
-            <h1 className="nft-title-h1">
-              {rozdzialy[currentChapter]["nft-title-h1"].split('\n').map((line, index) => (
-                <React.Fragment key={index}>
-                  {line}
-                  {index < rozdzialy[currentChapter]["nft-title-h1"].split('\n').length - 1 && <br />}
-                </React.Fragment>
-              ))}
-            </h1>
-            <h2 className="nft-title-h2">{rozdzialy[currentChapter]["nft-title-h2"]}</h2>
-            <button className="mint-button" onClick={() => mint(currentChapter)}>
-              Kup TERAZ
-            </button>
-          </div>
+        </div>
+        <div className="nft-text-container">
+          <h1 className="nft-title-h1">
+            {rozdzialy[currentChapter]["nft-title-h1"].split('\n').map((line, index) => (
+              <React.Fragment key={index}>
+                {line}
+                {index < rozdzialy[currentChapter]["nft-title-h1"].split('\n').length - 1 && <br />}
+              </React.Fragment>
+            ))}
+          </h1>
+          <h2 className="nft-title-h2">{rozdzialy[currentChapter]["nft-title-h2"]}</h2>
+          <button className="mint-button" onClick={() => mint(currentChapter)}>
+            Kup TERAZ
+          </button>
         </div>
       </div>
       
@@ -149,27 +149,27 @@ const Historia = ({ useHeaderMobile = false }) => {
         </div>
       </div>
       <br></br>
-      <div className="nft-container">
-        <div className="nft-content">
+      <div className="nft-content">
+        <div className="nft-img-wrapper shine">
           <img 
             src={getNftSrc()} 
             alt={`Rozdział ${currentChapter} NFT`} 
             className="nft-img" 
           />
-          <div className="nft-text-container">
-            <h1 className="nft-title-h1-bottom">
-              {rozdzialy[currentChapter]["nft-title-h1-bottom"].split('\n').map((line, index) => (
-                <React.Fragment key={index}>
-                  {line}
-                  {index < rozdzialy[currentChapter]["nft-title-h1-bottom"].split('\n').length - 1 && <br />}
-                </React.Fragment>
-              ))}
-            </h1>
-            <h2 className="nft-title-h2-bottom">{rozdzialy[currentChapter]["nft-title-h2-bottom"]}</h2>
-            <button className="mint-button" onClick={() => mint(currentChapter)}>
-              Kup TERAZ
-            </button>
-          </div>
+        </div>
+        <div className="nft-text-container">
+          <h1 className="nft-title-h1-bottom">
+            {rozdzialy[currentChapter]["nft-title-h1-bottom"].split('\n').map((line, index) => (
+              <React.Fragment key={index}>
+                {line}
+                {index < rozdzialy[currentChapter]["nft-title-h1-bottom"].split('\n').length - 1 && <br />}
+              </React.Fragment>
+            ))}
+          </h1>
+          <h2 className="nft-title-h2-bottom">{rozdzialy[currentChapter]["nft-title-h2-bottom"]}</h2>
+          <button className="mint-button" onClick={() => mint(currentChapter)}>
+            Kup TERAZ
+          </button>
         </div>
       </div>
 

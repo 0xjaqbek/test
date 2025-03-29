@@ -93,14 +93,15 @@ const Story = ({ useHeaderMobile = false }) => {
         />
       </div>
       
-      <div className="nft-container">
-        <div className="nft-content">
+      <div className="nft-content">
+        <div className="nft-img-wrapper shine">
           <img 
             src={getNftSrc()} 
             alt={`Chapter ${currentChapter} NFT`} 
             className="nft-img" 
           />
-          <div className="nft-text-container">
+        </div>
+        <div className="nft-text-container">
           <h1 className="nft-title-h1">
             {chapters[currentChapter]["nft-title-h1"].split('\n').map((line, index) => (
               <React.Fragment key={index}>
@@ -109,11 +110,10 @@ const Story = ({ useHeaderMobile = false }) => {
               </React.Fragment>
             ))}
           </h1>
-            <h2 className="nft-title-h2">{chapters[currentChapter]["nft-title-h2"]}</h2>
-            <button className="mint-button" onClick={() => mint(currentChapter)}>
-              Buy NOW
-            </button>
-          </div>
+          <h2 className="nft-title-h2">{chapters[currentChapter]["nft-title-h2"]}</h2>
+          <button className="mint-button" onClick={() => mint(currentChapter)}>
+            Buy NOW
+          </button>
         </div>
       </div>
       
@@ -141,14 +141,15 @@ const Story = ({ useHeaderMobile = false }) => {
         </div>
       </div>
       <br></br>
-      <div className="nft-container">
-        <div className="nft-content">
+      <div className="nft-content">
+        <div className="nft-img-wrapper shine">
           <img 
             src={getNftSrc()} 
             alt={`Chapter ${currentChapter} NFT`} 
             className="nft-img" 
           />
-          <div className="nft-text-container">
+        </div>
+        <div className="nft-text-container">
           <h1 className="nft-title-h1-bottom">
             {chapters[currentChapter]["nft-title-h1-bottom"].split('\n').map((line, index) => (
               <React.Fragment key={index}>
@@ -157,11 +158,10 @@ const Story = ({ useHeaderMobile = false }) => {
               </React.Fragment>
             ))}
           </h1>
-            <h2 className="nft-title-h2-bottom">{chapters[currentChapter]["nft-title-h2-bottom"]}</h2>
-            <button className="mint-button" onClick={() => mint(currentChapter)}>
-              Buy NOW
-            </button>
-          </div>
+          <h2 className="nft-title-h2-bottom">{chapters[currentChapter]["nft-title-h2-bottom"]}</h2>
+          <button className="mint-button" onClick={() => mint(currentChapter)}>
+            Buy NOW
+          </button>
         </div>
       </div>
 

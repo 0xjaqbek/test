@@ -173,11 +173,13 @@ const HistoriaMobile = () => {
       </div>
       
       <div className="mobile-nft-container">
-        <img 
-          src={getNftSrc()} 
-          alt={`Rozdział ${currentChapter} NFT`} 
-          className="mobile-nft-img" 
-        />
+        <div className="mobile-nft-img-wrapper shine">
+          <img 
+            src={getNftSrc()} 
+            alt={`Rozdział ${currentChapter} NFT`} 
+            className="mobile-nft-img" 
+          />
+        </div>
         <div className="mobile-nft-info">
           <h1 className="nft-title-h1">
             {rozdzialy[currentChapter]["nft-title-h1"].split('\n').map((line, index) => (
@@ -216,12 +218,13 @@ const HistoriaMobile = () => {
       </div>
       
       <div className="mobile-nft-container bottom-nft-container">
-        <img 
-          src={getNftSrc()} 
-          alt={`Rozdział ${currentChapter} NFT`} 
-          className="mobile-nft-img large-nft-img" 
-          style={{ width: "90%", maxWidth: "90vw" }}
-        />
+        <div className="mobile-nft-img-wrapper shine">
+          <img 
+            src={getNftSrc()} 
+            alt={`Rozdział ${currentChapter} NFT`} 
+            className="mobile-nft-img large-nft-img" 
+          />
+        </div>
         <div className="mobile-nft-info">
           <h1 className="nft-title-h1">
             {rozdzialy[currentChapter]["nft-title-h1-bottom"].split('\n').map((line, index) => (
