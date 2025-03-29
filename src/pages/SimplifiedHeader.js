@@ -65,7 +65,7 @@ const SimplifiedHeader = ({ scrollToTop, title, showChaptersButton = true }) => 
 
   // Handle chapter selection
   const handleChapterSelect = (chapterKey) => {
-    navigate(`/story#${chapterKey}`);
+    navigate(`/story`);
     closeDropdown();
   };
 
