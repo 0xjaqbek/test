@@ -8,13 +8,10 @@ import SocialIconsTelegram from "../Asets/SocialIconsTelegram.svg";
 import SocialIconsTT from "../Asets/SocialIconsTT.svg";
 import SocialIconsInstagram from "../Asets/Instagram.svg";
 import Manifold from "../Asets/manifold.svg";
-import ChapterDropdown from "./ChapterDropdown";
-import chapters from "./chapters";
 import { useSimpleHeaderMediaQuery } from "../DeviceDetection";
 
 const SimplifiedHeader = ({ scrollToTop, title, showChaptersButton = true }) => {
   const navigate = useNavigate();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   
   // Use header media query for 1200px breakpoint
   const useHeaderMobile = useSimpleHeaderMediaQuery();
@@ -53,20 +50,9 @@ const SimplifiedHeader = ({ scrollToTop, title, showChaptersButton = true }) => 
     }
   };
 
-  // Toggle dropdown visibility
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
-  // Close dropdown
-  const closeDropdown = () => {
-    setDropdownOpen(false);
-  };
-
-  // Handle chapter selection
-  const handleChapterSelect = (chapterKey) => {
-    navigate(`/story`);
-    closeDropdown();
+  // Navigate to story page directly
+  const handleNavigateToStory = () => {
+    navigate('/story');
   };
 
   // Render mobile header if useHeaderMobile is true
@@ -98,9 +84,9 @@ const SimplifiedHeader = ({ scrollToTop, title, showChaptersButton = true }) => 
               <div className="header-right">
                 <img 
                   src={BookIcon} 
-                  alt="Chapters" 
+                  alt="Story" 
                   className="nav-icon" 
-                  onClick={toggleDropdown}
+                  onClick={handleNavigateToStory}
                 />
               </div>
             )}
@@ -136,16 +122,6 @@ const SimplifiedHeader = ({ scrollToTop, title, showChaptersButton = true }) => 
             />
           </div>
         </div>
-
-        {/* Chapter dropdown component */}
-        {showChaptersButton && (
-          <ChapterDropdown 
-            chapters={chapters} 
-            isOpen={dropdownOpen} 
-            onClose={closeDropdown} 
-            onSelectChapter={handleChapterSelect}
-          />
-        )}
       </>
     );
   }
@@ -174,9 +150,9 @@ const SimplifiedHeader = ({ scrollToTop, title, showChaptersButton = true }) => 
             {showChaptersButton && (
               <img 
                 src={BookIcon} 
-                alt="Book" 
+                alt="Story" 
                 className="story-nav-icon book-icon" 
-                onClick={toggleDropdown}
+                onClick={handleNavigateToStory}
               />
             )}
           </div>
@@ -228,16 +204,6 @@ const SimplifiedHeader = ({ scrollToTop, title, showChaptersButton = true }) => 
           </button>
         </div>
       </div>
-
-      {/* Chapter dropdown component */}
-      {showChaptersButton && (
-        <ChapterDropdown 
-          chapters={chapters} 
-          isOpen={dropdownOpen} 
-          onClose={closeDropdown} 
-          onSelectChapter={handleChapterSelect}
-        />
-      )}
     </>
   );
 };

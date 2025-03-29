@@ -12,15 +12,12 @@ import SocialIconsInstagram from "../Asets/Instagram.svg";
 import ariaIcon from "../Asets/ariaChatIcon.png";
 import userIcon from "../Asets/userChatIcon.png";
 import upScrollIcon from "../Asets/upScroll.svg";
-import MobileChapterNav from "./MobileChapterNav"; 
-import chapters from "./chapters"; 
 
 const MobileChat = () => {
   const [inputValue, setInputValue] = useState("");
   const [userName, setUserName] = useState("");
   const [inputDisabled, setInputDisabled] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const [isNavOpen, setIsNavOpen] = useState(false); 
   const [messages, setMessages] = useState([]);
   const [messagePositions, setMessagePositions] = useState({});
   const [inputError, setInputError] = useState("");
@@ -85,12 +82,8 @@ const MobileChat = () => {
     navigate("/story");
   };
 
-  const toggleNav = () => {
-    setIsNavOpen(!isNavOpen);
-  };
-
-  const handleChapterSelect = (chapterKey) => {
-    navigate(`/story#${chapterKey}`);
+  const navigateToStory = () => {
+    navigate("/story");
   };
 
   const toggleInput = () => {
@@ -304,9 +297,9 @@ const MobileChat = () => {
           <div className="header-right">
             <img 
               src={BookIcon} 
-              alt="Chapters" 
+              alt="Story" 
               className="nav-icon" 
-              onClick={toggleNav}
+              onClick={navigateToStory}
             />
           </div>
         </div>
@@ -333,15 +326,6 @@ const MobileChat = () => {
           </div>
         </div>
       </div>
-      
-      {isNavOpen && (
-        <MobileChapterNav 
-          currentChapter=""
-          chapters={chapters}
-          onSelectChapter={handleChapterSelect}
-          onClose={toggleNav}
-        />
-      )}
     
       <div className="mobile-chat-wrapper">
       <div className="mobile-message-container">

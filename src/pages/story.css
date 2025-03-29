@@ -69,10 +69,11 @@ body::-webkit-scrollbar-thumb:hover {
 .story-header-title-container {
   display: flex;
   justify-content: space-between;
-  align-items:start;
-  width: 50vw;
+  align-items: start;
+  width: 520px;
   position: relative;
-  margin-left: 10%;
+  margin: 0 auto; /* Center the container */
+
 }
 
 .chat-header-title-container {

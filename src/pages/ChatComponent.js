@@ -25,8 +25,6 @@ const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
   const [messagePositions, setMessagePositions] = useState({});
   const [inputError, setInputError] = useState("");
-  const [isNavOpen, setIsNavOpen] = useState(false);
-  const [prevIsMobile, setPrevIsMobile] = useState(null);
   
   const messageRefs = useRef({});
   const chatWrapperRef = useRef(null);
@@ -47,6 +45,8 @@ const ChatComponent = () => {
     }
     setPrevIsMobile(isMobile);
   }, [isMobile]);
+  
+  const [prevIsMobile, setPrevIsMobile] = useState(null);
 
   // Auto-scroll to bottom when messages change
   useEffect(() => {
@@ -185,8 +185,8 @@ const ChatComponent = () => {
     navigate("/story");
   };
 
-  const toggleNav = () => {
-    setIsNavOpen(!isNavOpen);
+  const navigateToStory = () => {
+    navigate("/story");
   };
 
   const toggleInput = () => {
@@ -466,7 +466,14 @@ const ChatComponent = () => {
             </div>
           </div>
           
-
+          <div className="header-right">
+            <img 
+              src={BookIcon} 
+              alt="Story" 
+              className="nav-icon" 
+              onClick={navigateToStory}
+            />
+          </div>
         </div>
 
         <div className="header-border"></div>
